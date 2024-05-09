@@ -1,6 +1,6 @@
 import { GraphQLObjectType } from 'graphql';
-import { exposeModel } from '@sequelize-graphql/core';
-import { Author, Book } from '@models/index';
+import { GraphQLNonNullList, exposeModel } from '@sequelize-graphql/core';
+import { Author, Book, Rating } from '@models/index';
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -16,5 +16,10 @@ export default new GraphQLObjectType({
       findByIds: false,
       pagination: 'books',
     }),
+
+    ratings: {
+      type: new GraphQLNonNullList(Rating.type),
+      resolve: () => Rating.model.findAll()
+    },
   },
 });
