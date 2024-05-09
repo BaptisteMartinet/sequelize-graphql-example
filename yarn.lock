@@ -352,6 +352,11 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
+"@sequelize-graphql/core@^1.0.21":
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@sequelize-graphql/core/-/core-1.0.21.tgz#af7aee8742fb56f45a214ddbe757c556df556f5b"
+  integrity sha512-+WCkVUCIo9m7wbjE9EdZxAbxFGlMXTA/Vj03NrnHSwu/Iu6wWDdxTGfKJKxjPa0QnmY9+3WADRx5/wqaykhm2w==
+
 "@types/body-parser@*":
   version "1.19.5"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.5.tgz#04ce9a3b677dc8bd681a17da1ab9835dc9d3ede4"
