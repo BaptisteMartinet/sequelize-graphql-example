@@ -8,9 +8,10 @@ async function main() {
   await sequelize.authenticate();
   console.info(`Database "${sequelize.getDatabaseName()}" is ready`);
 
-  await sequelize.sync({ force: true });
-  const modelsCount = Object.keys(sequelize.models).length;
-  console.info(`${modelsCount} models synced`);
+  // Uncomment to force sync DB
+  // await sequelize.sync({ force: true });
+  // const modelsCount = Object.keys(sequelize.models).length;
+  // console.info(`${modelsCount} models synced`);
 
   const server = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(server, {
