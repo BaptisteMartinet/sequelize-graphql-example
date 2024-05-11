@@ -1,0 +1,240 @@
+type Query {
+  author(id: ID!): Author!
+  authorByIds(ids: [ID!]!): [Author!]!
+  authors(offset: Int, limit: Int, order: [AuthorOrderBy!], filters: AuthorFilters): AuthorOffsetConnection
+  book(id: ID!): Book!
+  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection
+  ratings: [Rating!]
+}
+
+type Author {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection
+  fullname: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type BookOffsetConnection {
+  nodes: [Book!]
+  count: Int!
+}
+
+type Book {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  authorId: ID!
+  title: String!
+  genre: Genre!
+  author: Author
+  ratings(offset: Int, limit: Int, order: [RatingOrderBy!], filters: RatingFilters): RatingOffsetConnection
+}
+
+enum Genre {
+  Action
+  Fantasy
+  ScienceFiction
+  Horror
+}
+
+type RatingOffsetConnection {
+  nodes: [Rating!]
+  count: Int!
+}
+
+type Rating {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  bookId: ID!
+  rating: Int!
+  comment: String
+  book: Book
+}
+
+input RatingOrderBy {
+  field: RatingFields!
+  ordering: OrderType!
+}
+
+enum RatingFields {
+  id
+  bookId
+  rating
+  comment
+  createdAt
+  updatedAt
+}
+
+enum OrderType {
+  ASC
+  DESC
+}
+
+"""The Rating model filters"""
+input RatingFilters {
+  id: IDFilters
+  bookId: IDFilters
+  rating: IntFilters
+  comment: StringFilters
+}
+
+input IDFilters {
+  """Equal"""
+  eq: ID
+
+  """Not equal"""
+  ne: ID
+
+  """In"""
+  in: [ID!]
+
+  """Not in"""
+  notIn: [ID!]
+}
+
+input IntFilters {
+  """Equal"""
+  eq: Int
+
+  """Not equal"""
+  ne: Int
+
+  """In"""
+  in: [Int!]
+
+  """Not in"""
+  notIn: [Int!]
+
+  """Less than"""
+  lt: Int
+
+  """Less than or equal"""
+  lte: Int
+
+  """Greater than"""
+  gt: Int
+
+  """Greater than or equal"""
+  gte: Int
+}
+
+input StringFilters {
+  """Equal"""
+  eq: String
+
+  """Not equal"""
+  ne: String
+
+  """In"""
+  in: [String!]
+
+  """Not in"""
+  notIn: [String!]
+
+  """Contains substring"""
+  contains: String
+
+  """Starts with substring"""
+  startsWith: String
+
+  """Ends with substring"""
+  endsWith: String
+}
+
+input BookOrderBy {
+  field: BookFields!
+  ordering: OrderType!
+}
+
+enum BookFields {
+  id
+  authorId
+  title
+  genre
+  createdAt
+  updatedAt
+}
+
+"""The Book model filters"""
+input BookFilters {
+  id: IDFilters
+  authorId: IDFilters
+  title: StringFilters
+  genre: GenreFilters
+}
+
+input GenreFilters {
+  """Equal"""
+  eq: Genre
+
+  """Not equal"""
+  ne: Genre
+
+  """In"""
+  in: [Genre!]
+
+  """Not in"""
+  notIn: [Genre!]
+}
+
+type AuthorOffsetConnection {
+  nodes: [Author!]
+  count: Int!
+}
+
+input AuthorOrderBy {
+  field: AuthorFields!
+  ordering: OrderType!
+}
+
+enum AuthorFields {
+  id
+  createdAt
+  updatedAt
+}
+
+"""The Author model filters"""
+input AuthorFilters {
+  id: IDFilters
+}
+
+type Mutation {
+  book: BookMutation!
+  author: AuthorMutation!
+  rating: RatingMutation!
+}
+
+type BookMutation {
+  create(input: CreateBookInput!): Book!
+  delete(id: ID!): Boolean!
+}
+
+input CreateBookInput {
+  authorId: ID!
+  title: String!
+  genre: Genre!
+}
+
+type AuthorMutation {
+  create(input: CreateAuthorInput!): Author!
+}
+
+input CreateAuthorInput {
+  firstname: String!
+  lastname: String!
+}
+
+type RatingMutation {
+  create(input: CreateRatingInput!): Rating!
+}
+
+input CreateRatingInput {
+  bookId: ID!
+  rating: Int!
+  comment: String
+}
