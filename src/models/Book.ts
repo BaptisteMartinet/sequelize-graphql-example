@@ -1,6 +1,7 @@
 import type { ForeignKey } from 'sequelize';
 import type { IdType, InferModelAttributesWithDefaults } from '@sequelize-graphql/core';
 
+import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { Model, STRING, ID, ENUM } from '@sequelize-graphql/core';
 import sequelize from '@db/index';
 import { Author, Rating } from '@models/index';
@@ -29,6 +30,16 @@ const Book: Model<BookModel> = new Model({
     authorId: { type: ID, allowNull: false, exposed: true },
     title: { type: STRING, allowNull: false, exposed: true },
     genre: { type: GenreEnum, allowNull: false, exposed: true },
+  },
+  fields: {
+    fullTitle: {
+      type: new GraphQLNonNull(GraphQLString),
+      async resolve(book, args, ctx) {
+        const { authorId, title } = book;
+        const author = await Author.ensureExistence(authorId, { ctx });
+        return `${title} by ${author.name}`;
+      },
+    },
   },
   associations: () => ({
     author: {
