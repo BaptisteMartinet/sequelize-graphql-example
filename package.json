@@ -9,6 +9,8 @@
     "start": "node --env-file=.env dist/index.js",
     "build": "tsc",
     "dev": "tsx watch --env-file=.env src/index.ts",
+    "run-script": "tsx --env-file=.env",
+    "gs": "yarn --silent run-script src/scripts/writeSchema.ts > schema.graphql",
     "lint": "yarn prettier . --write",
     "lint-check": "yarn prettier . --check"
   },
