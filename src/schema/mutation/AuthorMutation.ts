@@ -12,8 +12,7 @@ export default new GraphQLObjectType({
             new GraphQLInputObjectType({
               name: 'CreateAuthorInput',
               fields: {
-                firstname: { type: new GraphQLNonNull(GraphQLString) },
-                lastname: { type: new GraphQLNonNull(GraphQLString) },
+                name: { type: new GraphQLNonNull(GraphQLString) },
               },
             }),
           ),
@@ -21,9 +20,9 @@ export default new GraphQLObjectType({
       },
       async resolve(_, args, ctx) {
         const {
-          input: { firstname, lastname },
+          input: { name },
         } = args;
-        return Author.model.create({ firstname, lastname });
+        return Author.model.create({ name });
       },
     },
   },
