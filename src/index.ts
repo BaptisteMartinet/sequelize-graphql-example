@@ -1,8 +1,8 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { makeContext } from '@sequelize-graphql/core';
 import sequelize from './db';
 import schema from './schema';
+import context from 'context';
 
 async function main() {
   await sequelize.authenticate();
@@ -16,7 +16,7 @@ async function main() {
   const server = new ApolloServer({ schema });
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async () => makeContext(),
+    context,
   });
   console.info(`Server ready at: ${url}`);
 }
