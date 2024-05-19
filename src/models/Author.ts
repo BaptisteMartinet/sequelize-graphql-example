@@ -11,7 +11,7 @@ export interface AuthorModel extends InferModelAttributesWithDefaults<AuthorMode
 const Author: Model<AuthorModel> = new Model({
   name: 'Author',
   columns: {
-    name: { type: STRING, allowNull: false, exposed: false },
+    name: { type: STRING, allowNull: false, exposed: true },
   },
   associations: () => ({
     books: {
