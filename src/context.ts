@@ -7,7 +7,7 @@ export type Context = Awaited<ReturnType<typeof makeContext>>;
 
 export default async function makeContext(args: StandaloneServerContextFunctionArgument) {
   const { req } = args;
-  const authToken = req.headers.authorization;
+  const authToken = req.headers.authorization ?? 'dummyToken';
   assert(authToken, 'Missing authorization header');
   return {
     ...makeContext_(),
