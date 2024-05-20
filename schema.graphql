@@ -11,8 +11,8 @@ type Author {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
+  name: String!
   books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection
-  fullname: String!
 }
 
 """Date custom scalar type"""
@@ -32,6 +32,7 @@ type Book {
   genre: Genre!
   author: Author
   ratings(offset: Int, limit: Int, order: [RatingOrderBy!], filters: RatingFilters): RatingOffsetConnection
+  fullTitle: String!
 }
 
 enum Genre {
@@ -194,6 +195,7 @@ input AuthorOrderBy {
 
 enum AuthorFields {
   id
+  name
   createdAt
   updatedAt
 }
@@ -201,6 +203,7 @@ enum AuthorFields {
 """The Author model filters"""
 input AuthorFilters {
   id: IDFilters
+  name: StringFilters
 }
 
 type Mutation {
@@ -221,12 +224,17 @@ input CreateBookInput {
 }
 
 type AuthorMutation {
-  create(input: CreateAuthorInput!): Author!
+  create(input: AuthorCreateInput!): Author!
+  update(id: ID!, input: AuthorUpdateInput!): Author!
+  delete(id: ID!): Boolean!
 }
 
-input CreateAuthorInput {
-  firstname: String!
-  lastname: String!
+input AuthorCreateInput {
+  name: String!
+}
+
+input AuthorUpdateInput {
+  name: String
 }
 
 type RatingMutation {
