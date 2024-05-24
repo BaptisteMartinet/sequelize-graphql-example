@@ -213,11 +213,11 @@ type Mutation {
 }
 
 type BookMutation {
-  create(input: CreateBookInput!): Book!
+  create(input: BookCreateInput!): Book!
   delete(id: ID!): Boolean!
 }
 
-input CreateBookInput {
+input BookCreateInput {
   authorId: ID!
   title: String!
   genre: Genre!
