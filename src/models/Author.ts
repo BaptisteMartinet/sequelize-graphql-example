@@ -18,6 +18,7 @@ const Author: Model<AuthorModel> = new Model({
       model: Book,
       type: 'hasMany',
       exposed: true,
+      deleteCascade: true,
     },
   }),
   timestamps: true,
