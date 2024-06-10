@@ -19,7 +19,7 @@ export default new GraphQLObjectType({
 
     ratings: {
       type: new GraphQLNonNullList(Rating.type),
-      resolve: () => Rating.model.findAll()
+      resolve: () => Rating.model.findAll(),
     },
   },
 });
