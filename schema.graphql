@@ -1,8 +1,8 @@
 type Query {
   author(id: ID!): Author!
-  authorByIds(ids: [ID!]!): [Author!]!
   authors(offset: Int, limit: Int, order: [AuthorOrderBy!], filters: AuthorFilters): AuthorOffsetConnection!
   book(id: ID!): Book!
+  bookByIds(ids: [ID!]!): [Book!]!
   books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection!
   ratings: [Rating!]
 }
