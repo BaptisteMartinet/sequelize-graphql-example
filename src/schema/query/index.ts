@@ -7,13 +7,13 @@ export default new GraphQLObjectType({
   fields: {
     ...exposeModel(Author, {
       findById: 'author',
-      findByIds: 'authorByIds',
+      findByIds: false,
       pagination: 'authors',
     }),
 
     ...exposeModel(Book, {
       findById: 'book',
-      findByIds: false,
+      findByIds: 'bookByIds',
       pagination: 'books',
     }),
 
