@@ -214,6 +214,7 @@ type Mutation {
 
 type BookMutation {
   create(input: BookCreateInput!): Book!
+  update(id: ID!, input: BookUpdateInput!): Book!
   delete(id: ID!): Boolean!
 }
 
@@ -221,6 +222,11 @@ input BookCreateInput {
   authorId: ID!
   title: String!
   genre: Genre!
+}
+
+input BookUpdateInput {
+  title: String
+  genre: Genre
 }
 
 type AuthorMutation {
