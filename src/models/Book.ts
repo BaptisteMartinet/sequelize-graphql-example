@@ -28,7 +28,7 @@ const Book: Model<BookModel> = new Model({
   name: 'Book',
   columns: {
     authorId: { type: ID, allowNull: false, exposed: true },
-    title: { type: STRING, allowNull: false, exposed: true },
+    title: { type: STRING, allowNull: false, exposed: false },
     genre: { type: GenreEnum, allowNull: false, exposed: true },
   },
   fields: {
