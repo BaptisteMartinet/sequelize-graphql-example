@@ -1,9 +1,9 @@
 type Query {
   author(id: ID!): Author!
   authorByIds(ids: [ID!]!): [Author!]!
-  authors(offset: Int, limit: Int, order: [AuthorOrderBy!], filters: AuthorFilters): AuthorOffsetConnection
+  authors(offset: Int, limit: Int, order: [AuthorOrderBy!], filters: AuthorFilters): AuthorOffsetConnection!
   book(id: ID!): Book!
-  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection
+  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection!
   ratings: [Rating!]
 }
 
@@ -12,7 +12,7 @@ type Author {
   createdAt: Date!
   updatedAt: Date!
   name: String!
-  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection
+  books(offset: Int, limit: Int, order: [BookOrderBy!], filters: BookFilters): BookOffsetConnection!
 }
 
 """Date custom scalar type"""
@@ -31,7 +31,7 @@ type Book {
   title: String!
   genre: Genre!
   author: Author
-  ratings(offset: Int, limit: Int, order: [RatingOrderBy!], filters: RatingFilters): RatingOffsetConnection
+  ratings(offset: Int, limit: Int, order: [RatingOrderBy!], filters: RatingFilters): RatingOffsetConnection!
   fullTitle: String!
 }
 
