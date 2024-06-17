@@ -16,5 +16,16 @@ export default genModelMutations(Book, {
     },
   },
 
+  update: {
+    args: {
+      title: { type: GraphQLString },
+      genre: { type: GenreEnum.gqlType },
+    },
+    async resolve(book, args, ctx) {
+      const { title, genre } = args;
+      return book.update({ title, genre });
+    },
+  },
+
   delete: true,
 });
