@@ -28,7 +28,6 @@ type Book {
   createdAt: Date!
   updatedAt: Date!
   authorId: ID!
-  title: String!
   genre: Genre!
   author: Author
   ratings(offset: Int, limit: Int, order: [RatingOrderBy!], filters: RatingFilters): RatingOffsetConnection!
@@ -155,7 +154,6 @@ input BookOrderBy {
 enum BookFields {
   id
   authorId
-  title
   genre
   createdAt
   updatedAt
@@ -165,7 +163,6 @@ enum BookFields {
 input BookFilters {
   id: IDFilters
   authorId: IDFilters
-  title: StringFilters
   genre: GenreFilters
 }
 
